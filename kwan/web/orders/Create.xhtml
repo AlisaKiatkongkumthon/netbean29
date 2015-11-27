@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateOrdersTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_orderId}" for="orderId" />
+                    <h:inputText id="orderId" value="#{ordersController.selected.orderId}" title="#{bundle.CreateOrdersTitle_orderId}" required="true" requiredMessage="#{bundle.CreateOrdersRequiredMessage_orderId}"/>
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_prodId}" for="prodId" />
+                    <h:inputText id="prodId" value="#{ordersController.selected.prodId}" title="#{bundle.CreateOrdersTitle_prodId}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_amount}" for="amount" />
+                    <h:inputText id="amount" value="#{ordersController.selected.amount}" title="#{bundle.CreateOrdersTitle_amount}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_price}" for="price" />
+                    <h:inputText id="price" value="#{ordersController.selected.price}" title="#{bundle.CreateOrdersTitle_price}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_custName}" for="custName" />
+                    <h:inputText id="custName" value="#{ordersController.selected.custName}" title="#{bundle.CreateOrdersTitle_custName}" />
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_orderDate}" for="orderDate" />
+                    <h:inputText id="orderDate" value="#{ordersController.selected.orderDate}" title="#{bundle.CreateOrdersTitle_orderDate}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateOrdersLabel_custId}" for="custId" />
+                    <h:selectOneMenu id="custId" value="#{ordersController.selected.custId}" title="#{bundle.CreateOrdersTitle_custId}" >
+                        <f:selectItems value="#{customerController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{ordersController.create}" value="#{bundle.CreateOrdersSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{ordersController.prepareList}" value="#{bundle.CreateOrdersShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateOrdersIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

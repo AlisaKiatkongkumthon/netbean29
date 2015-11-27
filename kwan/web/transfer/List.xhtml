@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTransferTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTransferEmpty}" rendered="#{transferController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{transferController.items.rowCount > 0}">
+                    <h:outputText value="#{transferController.pagination.pageFirstItem + 1}..#{transferController.pagination.pageLastItem + 1}/#{transferController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{transferController.previous}" value="#{bundle.Previous} #{transferController.pagination.pageSize}" rendered="#{transferController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{transferController.next}" value="#{bundle.Next} #{transferController.pagination.pageSize}" rendered="#{transferController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{transferController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTransferTitle_tranNo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tranNo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTransferTitle_custName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custName}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTransferTitle_custAddress}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.custAddress}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTransferTitle_prodId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.prodId}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{transferController.prepareView}" value="#{bundle.ListTransferViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{transferController.prepareEdit}" value="#{bundle.ListTransferEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{transferController.destroy}" value="#{bundle.ListTransferDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{transferController.prepareCreate}" value="#{bundle.ListTransferCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTransferIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

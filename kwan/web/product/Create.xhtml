@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateProductTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateProductLabel_prodId}" for="prodId" />
+                    <h:inputText id="prodId" value="#{productController.selected.prodId}" title="#{bundle.CreateProductTitle_prodId}" required="true" requiredMessage="#{bundle.CreateProductRequiredMessage_prodId}"/>
+                    <h:outputLabel value="#{bundle.CreateProductLabel_prodName}" for="prodName" />
+                    <h:inputText id="prodName" value="#{productController.selected.prodName}" title="#{bundle.CreateProductTitle_prodName}" />
+                    <h:outputLabel value="#{bundle.CreateProductLabel_prodCategory}" for="prodCategory" />
+                    <h:inputText id="prodCategory" value="#{productController.selected.prodCategory}" title="#{bundle.CreateProductTitle_prodCategory}" />
+                    <h:outputLabel value="#{bundle.CreateProductLabel_prodColor}" for="prodColor" />
+                    <h:inputText id="prodColor" value="#{productController.selected.prodColor}" title="#{bundle.CreateProductTitle_prodColor}" />
+                    <h:outputLabel value="#{bundle.CreateProductLabel_prodPrice}" for="prodPrice" />
+                    <h:inputText id="prodPrice" value="#{productController.selected.prodPrice}" title="#{bundle.CreateProductTitle_prodPrice}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{productController.create}" value="#{bundle.CreateProductSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{productController.prepareList}" value="#{bundle.CreateProductShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateProductIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

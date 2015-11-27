@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTransferTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTransferLabel_tranNo}" for="tranNo" />
+                    <h:inputText id="tranNo" value="#{transferController.selected.tranNo}" title="#{bundle.CreateTransferTitle_tranNo}" required="true" requiredMessage="#{bundle.CreateTransferRequiredMessage_tranNo}"/>
+                    <h:outputLabel value="#{bundle.CreateTransferLabel_custName}" for="custName" />
+                    <h:inputText id="custName" value="#{transferController.selected.custName}" title="#{bundle.CreateTransferTitle_custName}" />
+                    <h:outputLabel value="#{bundle.CreateTransferLabel_custAddress}" for="custAddress" />
+                    <h:inputText id="custAddress" value="#{transferController.selected.custAddress}" title="#{bundle.CreateTransferTitle_custAddress}" />
+                    <h:outputLabel value="#{bundle.CreateTransferLabel_prodId}" for="prodId" />
+                    <h:selectOneMenu id="prodId" value="#{transferController.selected.prodId}" title="#{bundle.CreateTransferTitle_prodId}" required="true" requiredMessage="#{bundle.CreateTransferRequiredMessage_prodId}">
+                        <f:selectItems value="#{productController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{transferController.create}" value="#{bundle.CreateTransferSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{transferController.prepareList}" value="#{bundle.CreateTransferShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTransferIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
